@@ -1,0 +1,24 @@
+---
+ - name: 'Send script to remote server'
+   hosts: ktcl-cmp
+   become: true
+   gather_facts: true
+   vars:
+
+   tasks:
+     - name: 'Copy collection script to remote'
+       template:
+         src: ../scripts/collection_pve_reserved.sh
+         dest: /root/scripts/collection/collection_pve_reserved.sh
+         mode: a+x
+
+     - name: 'Add task collection to crontab'
+       cron:
+         name: 'Collection resources'
+         minute: '30'
+         hour: '23'
+         day: "*"
+         month: "*"
+         weekday: "*"
+         user: root
+         job: /root/scripts/collection/collection_pve_reserved.sh
