@@ -6,10 +6,6 @@ USER_PASSWORD=
 HOSTS=$(ls -l /root/collection/data/srv/ | awk {'print $9'})
 DATA_DIR=/root/collection/data/srv/
 
-#function drop_tables() {
-#mysql -u$USERNAME -p$USER_PASSWORD $DB -e "drop table cmp0001, cmp0003, cmp0007, cmp0008, cmp0009, win0001, win0002, win0003, win0004, win0005, win0006, win0009, win0111, win0112;;"
-#}
-
 function drop_tables() {
 mysql -u$USERNAME -p$USER_PASSWORD $DB -e "DELETE FROM $table_name WHERE ID='1';"
 }
